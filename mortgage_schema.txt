@@ -1,0 +1,26 @@
+| Stage                   | Field Name                     | Source(s)                  | Notes                                     |
+| ----------------------- | ------------------------------ | -------------------------- | ----------------------------------------- |
+| Application Initiation  | application_id                | Synthetic / HMDA           | Unique identifier                         |
+|                         | applicant_income              | HMDA                       | Income declared during application        |
+|                         | loan_amount_requested        | HMDA                       | Initial loan request                      |
+|                         | loan_type                     | HMDA                       | E.g., conventional, FHA, VA               |
+|                         | application_date              | Synthetic                  | Not in HMDA, generate via SDV             |
+|                         | property_type                 | HMDA                       | Type of property                          |
+| Application Review      | underwriter_id                | Synthetic                  | Internal synthetic data                   |
+|                         | review_start_date            | Synthetic                  | Estimate lag from application date        |
+|                         | underwriting_status           | Synthetic                  | Approved/Rejected/In Review               |
+| Approval / Denial       | decision_date                 | HMDA (action_taken_date) | Proxy for decision time                   |
+|                         | action_taken                  | HMDA                       | Approved, denied, withdrawn               |
+|                         | approval_amount               | Fannie/Freddie             | If available                              |
+|                         | denial_reason                 | HMDA                       | If denied                                 |
+| Loan Funding            | funding_date                  | Fannie/Freddie             | First payment date or use SDV to simulate |
+|                         | disbursed_amount              | Fannie/Freddie             | Final funded amount                       |
+|                         | interest_rate                 | Fannie/Freddie             | Origination rate                          |
+|                         | loan_term                     | Fannie/Freddie             | Term in months                            |
+| Performance & Repayment | monthly_payment               | Fannie/Freddie             | Scheduled payments                        |
+|                         | delinquency_flag              | Fannie/Freddie             | Monthly performance data                  |
+|                         | prepayment_flag               | Fannie/Freddie             | If paid early                             |
+|                         | modification_flag             | Fannie/Freddie             | Loan restructuring info                   |
+|                         | months_to_first_delinquency | Fannie/Freddie             | Can model process weaknesses              |
+| Settlement / Closure    | closure_date                  | Fannie/Freddie             | Payoff, default, or maturity              |
+|                         | closure_reason                | Fannie/Freddie             | Paid, defaulted, refinanced, etc.         |
